@@ -31,16 +31,28 @@ public class Triangle
 
     public bool IsEquilateral()
     {
-        return true;
+        return LengthAB.IsAlmostEqual(LengthBC) && LengthAB.IsAlmostEqual(LengthCA);
     }
 
     public bool IsIsosceles()
     {
-        return true;
+        return LengthAB.IsAlmostEqual(LengthBC) || LengthBC.IsAlmostEqual(LengthCA) || LengthAB.IsAlmostEqual(LengthCA);
     }
 
     public bool IsRight()
     {
-        return true;
+        return IsRight(LengthAB, LengthBC, LengthCA) ||
+               IsRight(LengthBC, LengthAB, LengthCA) ||
+               IsRight(LengthCA, LengthAB, LengthBC);
+    }
+
+    private bool IsRight(double length1, double length2, double length3)
+    {
+        return length1.IsAlmostEqual(Math.Sqrt(Math.Pow(length2, 2) + Math.Pow(length3, 2)));
+    }
+
+    public double Perimeter()
+    {
+        return LengthAB + LengthBC + LengthCA;
     }
 }
